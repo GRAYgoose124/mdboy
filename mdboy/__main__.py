@@ -4,14 +4,15 @@ import logging
 from pathlib import Path
 
 from . import MarkdownManager
-from .plugins import Tag
+from .plugins import *
 
+l = logging.getLogger(__name__)
 
 def main():
     logging.basicConfig(level=logging.DEBUG, format="%(levelname)s|\t%(name)s| %(message)s")
 
     manager = MarkdownManager(Path('.'))
-    manager.add_plugin(Tag())
+    manager.add_plugins(Title(), TitleTags(), TableOfContents())
 
     while True:
         try:
